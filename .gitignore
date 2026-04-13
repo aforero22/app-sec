@@ -1,0 +1,29 @@
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
+terraform/terraform.tfvars
+terraform/*.auto.tfvars
+
+# SSH keys
+*.pem
+*.key
+
+# Secrets
+.env
+.env.*
+
+# Origin certs (generated)
+origin/certs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+worker/node_modules/
+
+# Wrangler
+worker/.wrangler/

@@ -1,0 +1,14 @@
+{
+  "name": "cse-homework-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Worker — cURL redirect, cookie bypass, WAF rules",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
