@@ -1,0 +1,59 @@
+========================================
+ Task 5: DNS Records via Scoped API Token
+ Date: 2026-04-13 23:00 UTC
+========================================
+
+Token Scope: Zone → DNS → Read (single zone: ossfia.ai)
+Auth Method: Bearer token (Authorization: Bearer <token>)
+API Endpoint: GET https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records
+
+==> Output:
+
+{
+  "success": true,
+  "total_records": 6,
+  "records": [
+    {
+      "type": "CNAME",
+      "name": "tunnel.ossfia.ai",
+      "content": "df224f6c-9936-44fe-82a6-868a142bb2b8.cfargotunnel.com",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "MX",
+      "name": "send.ossfia.ai",
+      "content": "feedback-smtp.us-east-1.amazonses.com",
+      "proxied": false,
+      "ttl": 3600
+    },
+    {
+      "type": "TXT",
+      "name": "resend._domainkey.ossfia.ai",
+      "content": "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQ...",
+      "proxied": false,
+      "ttl": 3600
+    },
+    {
+      "type": "TXT",
+      "name": "send.ossfia.ai",
+      "content": "v=spf1 include:amazonses.com ~all",
+      "proxied": false,
+      "ttl": 3600
+    },
+    {
+      "type": "AAAA",
+      "name": "panel.ossfia.ai",
+      "content": "100::",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "AAAA",
+      "name": "vote-elpoli.ossfia.ai",
+      "content": "100::",
+      "proxied": true,
+      "ttl": 1
+    }
+  ]
+}

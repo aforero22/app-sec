@@ -1,0 +1,42 @@
+========================================
+ WAF Evidence Collection
+ Target: https://tunnel.ossfia.ai
+ Date: 2026-04-13 22:58 UTC
+========================================
+
+--- Test 1: Normal request (expect 302 — cURL triggers redirect) ---
+HTTP 302
+
+--- Test 2: cURL redirect (expect 302) ---
+HTTP 302 → https://developers.cloudflare.com/workers/learning/
+
+--- Test 3: Cookie bypass (expect 200, no redirect) ---
+HTTP 200
+
+--- Test 4: SQLi — OR 1=1 (expect 403) ---
+{"error":"Blocked","ray":"25c9e7c5-8ea3-4870-886a-860cfb408733","code":403}
+HTTP 403
+
+--- Test 5: SQLi — UNION SELECT (expect 403) ---
+{"error":"Blocked","ray":"4a141cb0-085d-4438-b2c9-b3016709ec74","code":403}
+HTTP 403
+
+--- Test 6: XSS — <script> tag (expect 403) ---
+{"error":"Blocked","ray":"33df6fb9-6ad0-482b-a98e-1adfa3e48f9b","code":403}
+HTTP 403
+
+--- Test 7: XSS — onerror handler (expect 403) ---
+{"error":"Blocked","ray":"88b2936b-0177-4d7d-a093-5a6960e3a9eb","code":403}
+HTTP 403
+
+--- Test 8: Security response headers ---
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+content-security-policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+permissions-policy: camera=(), microphone=(), geolocation=()
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+x-frame-options: DENY
+
+========================================
+ Evidence collection complete
+========================================
