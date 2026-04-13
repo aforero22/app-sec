@@ -27,3 +27,9 @@ worker/node_modules/
 
 # Wrangler
 worker/.wrangler/
+
+# Logs
+*.log
+
+# Internal drafts
+docs/PRESENTATION_PROMPT.md
