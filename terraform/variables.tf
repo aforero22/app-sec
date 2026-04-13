@@ -4,9 +4,10 @@
 
 # ── Cloudflare ────────────────────────────────
 variable "cloudflare_api_token" {
-  description = "Scoped API token for Cloudflare"
+  description = "Scoped API token for Cloudflare (or set CLOUDFLARE_API_TOKEN env var)"
   type        = string
   sensitive   = true
+  default     = null
 }
 
 variable "cloudflare_account_id" {

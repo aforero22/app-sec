@@ -20,13 +20,13 @@ data "aws_subnets" "default" {
 # This eliminates the origin's entire inbound attack surface.
 resource "aws_security_group" "origin" {
   name        = "cse-homework-origin"
-  description = "Origin server — outbound only (Cloudflare Tunnel)"
+  description = "Origin server - outbound only via Cloudflare Tunnel"
   vpc_id      = data.aws_vpc.default.id
 
   # No ingress rules — the whole point of using Tunnel
 
   egress {
-    description = "Allow all outbound (cloudflared needs HTTPS/QUIC to CF edge)"
+    description = "Allow all outbound for cloudflared HTTPS/QUIC to CF edge"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -72,7 +72,7 @@ resource "aws_instance" "origin" {
   }
 
   root_block_device {
-    volume_size = 8
+    volume_size = 30
     volume_type = "gp3"
     encrypted   = true
   }

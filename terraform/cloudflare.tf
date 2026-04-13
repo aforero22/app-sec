@@ -88,38 +88,32 @@ resource "cloudflare_ruleset" "security_headers" {
       enabled     = true
 
       action_parameters = {
-        headers = [
-          {
-            name      = "Content-Security-Policy"
+        headers = {
+          "Content-Security-Policy" = {
             operation = "set"
             value     = "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
-          },
-          {
-            name      = "Strict-Transport-Security"
+          }
+          "Strict-Transport-Security" = {
             operation = "set"
             value     = "max-age=31536000; includeSubDomains; preload"
-          },
-          {
-            name      = "X-Frame-Options"
+          }
+          "X-Frame-Options" = {
             operation = "set"
             value     = "DENY"
-          },
-          {
-            name      = "X-Content-Type-Options"
+          }
+          "X-Content-Type-Options" = {
             operation = "set"
             value     = "nosniff"
-          },
-          {
-            name      = "Referrer-Policy"
+          }
+          "Referrer-Policy" = {
             operation = "set"
             value     = "strict-origin-when-cross-origin"
-          },
-          {
-            name      = "Permissions-Policy"
+          }
+          "Permissions-Policy" = {
             operation = "set"
             value     = "camera=(), microphone=(), geolocation=()"
           }
-        ]
+        }
       }
     }
   ]

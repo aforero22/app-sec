@@ -21,6 +21,8 @@ provider "aws" {
   region = var.aws_region
 }
 
+# Reads CLOUDFLARE_API_TOKEN env var automatically.
+# Falls back to var.cloudflare_api_token if set in tfvars.
 provider "cloudflare" {
   api_token = var.cloudflare_api_token
 }
