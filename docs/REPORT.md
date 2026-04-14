@@ -9,7 +9,7 @@
 
 ### Architecture Overview
 
-I built a header-echo origin server on AWS EC2 (eu-south-2, Spain) connected to Cloudflare exclusively through a Cloudflare Tunnel. The origin has **zero inbound firewall rules** — all traffic flows through the tunnel's outbound-only QUIC connection to Cloudflare's edge.
+I built a header-echo origin server on AWS EC2 (eu-west-1, Ireland) connected to Cloudflare exclusively through a Cloudflare Tunnel. The origin has **zero inbound firewall rules** — all traffic flows through the tunnel's outbound-only QUIC connection to Cloudflare's edge. I verified this directly: the EC2's public IP does not respond to ping, HTTP, HTTPS, or the origin port — every direct connection attempt times out. The only viable path into the origin is through the tunnel.
 
 The entire infrastructure is defined as code using **Terraform with two providers** (AWS + Cloudflare), making the setup fully reproducible with a single `terraform apply`.
 
