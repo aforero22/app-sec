@@ -92,4 +92,10 @@ resource "aws_instance" "origin" {
     Name    = "cse-homework-origin"
     Project = "cloudflare-cse-homework"
   }
+
+  # Prevent instance replacement when AWS publishes new AL2023 AMIs.
+  # To pick up a new AMI, run: terraform taint aws_instance.origin
+  lifecycle {
+    ignore_changes = [ami]
+  }
 }
