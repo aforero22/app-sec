@@ -2,11 +2,19 @@
 
 > Application Security homework — origin server, Cloudflare Tunnel, Workers, Zero Trust
 
+## Prerequisites
+
+- **AWS account** with IAM credentials (EC2, VPC permissions)
+- **Cloudflare account** with a domain added and active nameservers
+- **Terraform** >= 1.5 (manages AWS + Cloudflare resources)
+- **Node.js** >= 20 (origin server)
+- **Wrangler** >= 4.x (Worker deployment)
+
 ## Architecture
 
 ```
                      TLS 1.2+                     Tunnel (QUIC)
-[Visitor] ──────────────────> [Cloudflare Edge] ─────────────────> [EC2 eu-south-2]
+[Visitor] ──────────────────> [Cloudflare Edge] ─────────────────> [EC2 eu-west-1]
                                 │                                   │
                                 ├─ Worker (cURL redirect + WAF)     ├─ Hono server (:8080)
                                 ├─ Transform Rules (sec headers)    ├─ cloudflared daemon

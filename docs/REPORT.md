@@ -21,8 +21,8 @@ The entire infrastructure is defined as code using **Terraform with two provider
 | **2. SSL Full-Strict** | Configured via Terraform (`cloudflare_zone_setting`, setting_id `ssl`, value `strict`). The tunnel itself provides a valid origin certificate, satisfying the strict validation requirement. |
 | **3. TLS 1.2+** | Set via Terraform (`min_tls_version = "1.2"`). Also enabled TLS 1.3 as a bonus. |
 | **4. Tunnel** | Named tunnel created via Terraform, `cloudflared` installed on EC2 as a systemd service via user_data bootstrap. DNS CNAME `tunnel.ossfia.ai` points to the tunnel. |
-| **5. API token** | Created a scoped token with Zone:DNS:Read permission on a single zone. Script uses Bearer auth and outputs formatted JSON via `jq`. |
-| **6. Worker** | Fixed 4 bugs in the provided script. Implemented using ES modules format. Added cookie bypass (`cf-noredir=true`) and WAF-like detection with 10 rules (5 SQLi + 5 XSS). |
+| **5. API token** | Created a scoped token with Zone:DNS:Read permission on a single zone. Script uses Bearer auth and outputs formatted JSON via `jq`. See [`evidence/dns-records.txt`](../evidence/dns-records.txt). |
+| **6. Worker** | Fixed 4 bugs in the provided script. Implemented using ES modules format. Added cookie bypass (`cf-noredir=true`) and WAF-like detection with 10 rules (5 SQLi + 5 XSS). See [`evidence/waf-tests.txt`](../evidence/waf-tests.txt). |
 | **7. Zero Trust** | Access Application on `tunnel.ossfia.ai/secure` with email-based allow policy, using Cloudflare's built-in One-Time PIN authentication. |
 
 ### Bugs Fixed in the Worker Script

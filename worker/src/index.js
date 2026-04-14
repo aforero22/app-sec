@@ -11,20 +11,22 @@ const REDIRECT_TARGET =
   "https://developers.cloudflare.com/workers/learning/";
 
 // ── WAF Rule Definitions ─────────────────────
+// Based on OWASP Top 10 injection patterns (A03:2021).
+// Each rule has a unique ID for log correlation via wrangler tail.
 const SQLI_RULES = [
-  { id: "SQLI-001", rx: /('|%27)\s*(OR|AND)\s+\d+\s*=\s*\d+/i },
-  { id: "SQLI-002", rx: /UNION\s+(ALL\s+)?SELECT/i },
-  { id: "SQLI-003", rx: /;\s*(DROP|ALTER|DELETE|INSERT|UPDATE)\s/i },
-  { id: "SQLI-004", rx: /SLEEP\s*\(\d+\)/i },
-  { id: "SQLI-005", rx: /INFORMATION_SCHEMA/i },
+  { id: "SQLI-001", rx: /('|%27)\s*(OR|AND)\s+\d+\s*=\s*\d+/i },  // Auth bypass: ' OR 1=1
+  { id: "SQLI-002", rx: /UNION\s+(ALL\s+)?SELECT/i },               // Data exfiltration
+  { id: "SQLI-003", rx: /;\s*(DROP|ALTER|DELETE|INSERT|UPDATE)\s/i }, // Stacked destructive queries
+  { id: "SQLI-004", rx: /SLEEP\s*\(\d+\)/i },                       // Time-based blind SQLi
+  { id: "SQLI-005", rx: /INFORMATION_SCHEMA/i },                     // Schema reconnaissance
 ];
 
 const XSS_RULES = [
-  { id: "XSS-001", rx: /<script[\s>]/i },
-  { id: "XSS-002", rx: /javascript\s*:/i },
-  { id: "XSS-003", rx: /on(error|load|click|mouseover|focus|blur)\s*=/i },
-  { id: "XSS-004", rx: /<iframe[\s>]/i },
-  { id: "XSS-005", rx: /document\.(cookie|write|location)/i },
+  { id: "XSS-001", rx: /<script[\s>]/i },                            // Classic script injection
+  { id: "XSS-002", rx: /javascript\s*:/i },                          // URI scheme injection
+  { id: "XSS-003", rx: /on(error|load|click|mouseover|focus|blur)\s*=/i }, // Event handler injection
+  { id: "XSS-004", rx: /<iframe[\s>]/i },                            // Frame injection
+  { id: "XSS-005", rx: /document\.(cookie|write|location)/i },       // DOM manipulation / cookie theft
 ];
 
 const ALL_RULES = [
